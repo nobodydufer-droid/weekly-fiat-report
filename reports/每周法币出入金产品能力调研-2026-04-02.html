@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>每周法币出入金产品能力调研 - 2026-04-02</title>
+    <style>
+      :root {
+        --bg: #f3f5ef;
+        --panel: #fffdf8;
+        --ink: #1f2a1f;
+        --muted: #66705f;
+        --line: #d8ddce;
+        --accent: #1f6b4f;
+        --accent-soft: #ddefe5;
+        --warn: #b8741a;
+        --warn-soft: #fff1d9;
+        --danger: #8a3b2f;
+        --danger-soft: #fce7e1;
+        --shadow: 0 18px 50px rgba(31, 42, 31, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+          "Microsoft YaHei", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, #eef7ef 0, transparent 28%),
+          linear-gradient(180deg, #f8f9f3 0%, var(--bg) 100%);
+      }
+
+      .page {
+        width: min(1180px, calc(100vw - 32px));
+        margin: 24px auto 48px;
+      }
+
+      .hero {
+        padding: 28px 30px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background:
+          linear-gradient(135deg, rgba(31, 107, 79, 0.08), rgba(255, 255, 255, 0.92)),
+          var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+
+      h1 {
+        margin: 14px 0 10px;
+        font-size: clamp(28px, 5vw, 44px);
+        line-height: 1.1;
+      }
+
+      .subtitle {
+        margin: 0;
+        max-width: 860px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .metric {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .metric .label {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .metric .value {
+        margin-top: 8px;
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .panel {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: 22px;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 17px;
+      }
+
+      .list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .list-item {
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: #fafaf6;
+        border: 1px solid #e8ebdf;
+      }
+
+      .list-item strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--muted);
+        background: #eef1e6;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 12px;
+      }
+
+      .event {
+        padding: 16px;
+        border-left: 4px solid var(--accent);
+        background: #fcfcf8;
+        border-radius: 0 16px 16px 0;
+      }
+
+      .event.warn {
+        border-left-color: var(--warn);
+        background: var(--warn-soft);
+      }
+
+      .event.danger {
+        border-left-color: var(--danger);
+        background: var(--danger-soft);
+      }
+
+      .event .meta {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .priority {
+        display: grid;
+        gap: 12px;
+      }
+
+      .pbox {
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: #fafcf7;
+      }
+
+      .pbox.p0 {
+        background: #eef7f1;
+      }
+
+      .pbox.p1 {
+        background: #fff8ea;
+      }
+
+      .pbox.p2 {
+        background: #f8f6ff;
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        font-size: 14px;
+      }
+
+      .table th,
+      .table td {
+        padding: 12px 10px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      .table th {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .footer {
+        margin-top: 18px;
+        padding: 20px 24px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--panel);
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      @media (max-width: 900px) {
+        .metrics,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <span class="eyebrow">Fiat On/Off-ramp Weekly</span>
+        <h1>每周法币出入金产品能力调研</h1>
+        <p class="subtitle">
+          统计窗口聚焦最近 7 天的官方产品页、公告、帮助中心与可信来源。结论上，本周没有出现跨平台、跨区域的重大能力跃迁，
+          但出现了值得跟进的流程优化、市场促活和监管收缩动作。
+        </p>
+        <div class="metrics">
+          <div class="metric">
+            <div class="label">本周关键变化</div>
+            <div class="value">3</div>
+          </div>
+          <div class="metric">
+            <div class="label">最重要模式</div>
+            <div class="value">验证前置</div>
+          </div>
+          <div class="metric">
+            <div class="label">重点区域</div>
+            <div class="value">AZ / MX / NL</div>
+          </div>
+          <div class="metric">
+            <div class="label">产品判断</div>
+            <div class="value">无重大新增</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>本周重点结论</h2>
+          <div class="list">
+            <div class="list-item">
+              <strong>本周无跨平台重大新增能力</strong>
+              行业公开动作仍以局部市场优化、合规调整和费率促活为主，说明短期投入重点不是无限扩 rail，而是提高成功率和可控性。
+            </div>
+            <div class="list-item">
+              <strong>OKX AZN P2P 的“自动验证后放币”最值得跟进</strong>
+              这是流程级优化，不只是文案调整；它同时影响成交时长、纠纷率、假凭证风险和银行同名约束。
+            </div>
+            <div class="list-item">
+              <strong>MEXC 在墨西哥促活，在荷兰收缩</strong>
+              同一个平台在不同国家采取完全不同策略，意味着法币产品必须具备国家级开关和精细路由。
+            </div>
+            <div class="list-item">
+              <strong>KYC/KYB、T+1/T+2、同名验证继续前置</strong>
+              法币增长已越来越依赖“增长和风控一体化设计”，而不是单纯压缩流程。
+            </div>
+            <div class="list-item">
+              <strong>U 卡竞争开始转向精细化运营</strong>
+              Bitget 在亚太集中补齐卡申请、费率、返现和安全说明，Bybit 则继续按区域更新费率与限额矩阵，竞争点正从“有无卡”转向“区域准入、费率和消费体验”。
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>信号强度分布</h2>
+          <div class="timeline">
+            <div class="event">
+              <div class="meta">流程优化 / 高价值</div>
+              <h3>OKX · AZN P2P 自动验证放币</h3>
+              从人工确认改成支付校验成功后自动放币，失败自动撤单。
+            </div>
+            <div class="event warn">
+              <div class="meta">增长促活 / 中价值</div>
+              <h3>MEXC · 墨西哥 SPEI 0 费入金</h3>
+              用本地银行 rail 拉动 MXN 入金和 Quick Buy 转化。
+            </div>
+            <div class="event danger">
+              <div class="meta">合规收缩 / 高影响</div>
+              <h3>MEXC · 荷兰法币能力暂停</h3>
+              P2P、银行转账、fiat deposit 与第三方法币服务一并收紧。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top: 18px">
+        <h2>本周新增 / 变化的产品能力</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>平台</th>
+              <th>变化内容</th>
+              <th>模块</th>
+              <th>地区</th>
+              <th>潜在影响</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OKX P2P</td>
+              <td>AZN 市场取消手动“我已付款”和上传凭证，改为支付验证成功后自动放币。</td>
+              <td>P2P / 风控 / 路由</td>
+              <td>阿塞拜疆</td>
+              <td>缩短路径，降低纠纷与假凭证风险，但会提高前置验证门槛。</td>
+            </tr>
+            <tr>
+              <td>MEXC Fiat Deposit</td>
+              <td>MXN 经 SPEI 银行转账入金限时 0 费，入金后可直接用于 Quick Buy。</td>
+              <td>入金 / 买币 / 支付方式</td>
+              <td>墨西哥</td>
+              <td>降低首充摩擦，提升本地 bank rail 转化与回流充值。</td>
+            </tr>
+            <tr>
+              <td>MEXC Fiat</td>
+              <td>荷兰用户的 P2P、银行转账、fiat deposit 和第三方法币服务暂停。</td>
+              <td>入金 / 出金 / P2P / 合规</td>
+              <td>荷兰</td>
+              <td>法币入口直接收缩，说明监管驱动下的国家级关停能力非常关键。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="chips">
+          <span class="chip">SEPA</span>
+          <span class="chip">PIX</span>
+          <span class="chip">SPEI</span>
+          <span class="chip">ACH / RTP</span>
+          <span class="chip">卡支付</span>
+          <span class="chip">P2P</span>
+          <span class="chip">KYC / KYB</span>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>竞品观察与归纳</h2>
+          <div class="list">
+            <div class="list-item">
+              <strong>1. 支付验证前置替代人工确认</strong>
+              对高风险 P2P 市场尤其有效，能把凭证纠纷处理前移为支付验证处理。
+            </div>
+            <div class="list-item">
+              <strong>2. 本地银行 rails 仍是主战场</strong>
+              SPEI、SEPA、ACH/RTP 仍比单纯扩卡渠道更具成本和时效优势。
+            </div>
+            <div class="list-item">
+              <strong>3. 同名账户与 KYC/KYB 约束前移</strong>
+              从“失败后风控兜底”变成“交易前置门槛”。
+            </div>
+            <div class="list-item">
+              <strong>4. T+1/T+2 常态化</strong>
+              平衡拒付、欺诈和提现体验，后续应按国家和渠道差异化控制。
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>U卡市场调研</h2>
+          <div class="priority">
+            <div class="pbox p0">
+              <h3>Bitget Card APAC</h3>
+              2026-03-25 集中上线亚太卡帮助中心矩阵，覆盖申请资格、交易安全、费率限额、返现与卡管理。当前虚拟卡可立即使用，并支持 Apple Pay / Google Pay。
+            </div>
+            <div class="pbox p1">
+              <h3>Bybit Card</h3>
+              2026-03-26 更新分区域费率与 ATM / 消费限额矩阵，继续按 Australia、Argentina、Brazil、AIFC、Asia Pacific、Mexico、Georgia 等区域拆分规则。
+            </div>
+            <div class="pbox p2">
+              <h3>赛道判断</h3>
+              U 卡核心竞争点已经转向账户结构、虚拟卡发卡速度、钱包接入、返现设计与风控透明度，而不仅是“能不能发卡”。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top: 18px">
+        <h2>Bitunix / 交易所启发</h2>
+        <div class="priority">
+          <div class="pbox p0">
+            <h3>P0</h3>
+            先做支付验证前置、国家级开关、T+1/T+2 策略引擎。这些能力直接影响转化、成功率和合规底线。
+          </div>
+          <div class="pbox p1">
+            <h3>P1</h3>
+            把 SEPA / SPEI / PIX 做成“低费率 + 到账即买”的增长入口，并把 KYC 同名前移到绑定阶段。
+          </div>
+          <div class="pbox p2">
+            <h3>P2</h3>
+            可评估 U 卡方向：优先做虚拟卡、Apple Pay / Google Pay、OTC/资金账户直连和返现机制，再逐步扩展实体卡与区域发卡。
+          </div>
+        </div>
+      </section>
+
+      <section class="footer">
+        <h2>信息来源</h2>
+        <div class="list">
+          <div class="list-item"><a href="https://www.okx.com/en-gb/help/azn-p2p-trading-flow-update-announcement">OKX - AZN P2P trading flow update announcement</a></div>
+          <div class="list-item"><a href="https://www.mexc.com/announcements/article/limited-time-0-fees-on-mxn-deposits-via-bank-transfers-spei-17827791534353">MEXC - Limited-Time 0 Fees on MXN Deposits via Bank Transfers (SPEI)</a></div>
+          <div class="list-item"><a href="https://www.mexc.com/announcements/article/important-update-17827791534363">MEXC - Temporary Suspension of Fiat Services for Netherlands Users</a></div>
+          <div class="list-item"><a href="https://blog.kraken.com/news/instant-usd-withdrawals">Kraken - Instant USD withdrawals now available on Kraken</a></div>
+          <div class="list-item"><a href="https://support.kraken.com/articles/instant-transfer-rtp">Kraken Support - Instant Transfer (RTP)</a></div>
+          <div class="list-item"><a href="https://www.bitget.com/support/articles/12560603881031">Bitget - Introduction to the Bitget Card (Asia Pacific)</a></div>
+          <div class="list-item"><a href="https://www.bitget.com/support/articles/12560603881036">Bitget - Bitget Card Fee Schedule and Spending Limits (Asia Pacific)</a></div>
+          <div class="list-item"><a href="https://www.bitget.com/support/articles/12560603881037">Bitget - Introduction to Bitget Card Cashback Program (Asia Pacific)</a></div>
+          <div class="list-item"><a href="https://www.bybit.com/en/help-center/article/Fees-and-Spending-Limits-Bybit-Card">Bybit - Fees and Limits (Bybit Card)</a></div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
